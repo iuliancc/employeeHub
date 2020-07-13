@@ -2,21 +2,20 @@ package com.threedi.hub.employeeHub;
 
 
 import com.threedi.hub.employeeHub.infrastructure.AppConfigurationProperties;
-import com.threedi.hub.employeeHub.retriveValuesDomain.ExelFile;
-import com.threedi.hub.employeeHub.retriveValuesDomain.GenericFile;
+import com.threedi.hub.employeeHub.fileDomain.ExelFile;
+import com.threedi.hub.employeeHub.fileDomain.GenericFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.PostConstruct;
 import java.io.File;
 
+
 @Service
 public class WhenFileUpdatedService {
-
 
 
     private static final Logger log = LoggerFactory.getLogger(WhenFileUpdatedService.class);
@@ -24,36 +23,39 @@ public class WhenFileUpdatedService {
     @Autowired
     AppConfigurationProperties appConfigurationProperties;
 
-    private Long timedif;
+    private long timedif;
     private File file;
 
     @PostConstruct
     public void postConstruct() {
 
-        file = new File(appConfigurationProperties.getPath());
+        file = new File("employeeHubImport.xlsx");
         timedif = file.lastModified();
 
     }
 
     @Async
-    @Scheduled(fixedDelay = 1000)
-    public void whenUpdated() {
+    @Scheduled(fixedDelay = 3000)
+    public void whenUpdated() throws Exception {
 
-        Long timedif = file.lastModified();
-        if (!this.timedif.equals(timedif)) {
+        log.trace("I am working");
+        long timedif = file.lastModified();
+        log.trace("Time dif is :" + timedif);
 
-            GenericFile fileWithValues = new ExelFile(File);
-            fileWithValues.employeesValues;
+        if (!(this.timedif == timedif)) {
 
-            repo.save(employeesValues)
+            GenericFile fileWithValues = new ExelFile();
 
+                fileWithValues.updatefileFromFolder(file);
 
         }
 
+        this.timedif = timedif;
 
     }
-
-
 }
+
+
+
 
 
