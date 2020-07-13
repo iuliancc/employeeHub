@@ -1,4 +1,4 @@
-package com.threedi.hub.employeeHub;
+package com.threedi.hub.employeeHub.applicationService;
 
 
 import com.threedi.hub.employeeHub.infrastructure.AppConfigurationProperties;

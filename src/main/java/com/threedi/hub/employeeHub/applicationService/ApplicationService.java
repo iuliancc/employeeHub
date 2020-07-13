@@ -1,4 +1,4 @@
-package com.threedi.hub.employeeHub;
+package com.threedi.hub.employeeHub.applicationService;
 
 
 import org.slf4j.Logger;

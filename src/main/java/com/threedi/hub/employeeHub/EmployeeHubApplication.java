@@ -1,5 +1,6 @@
 package com.threedi.hub.employeeHub;
 
+import com.threedi.hub.employeeHub.applicationService.ApplicationService;
 import com.threedi.hub.employeeHub.infrastructure.AppConfigurationProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
