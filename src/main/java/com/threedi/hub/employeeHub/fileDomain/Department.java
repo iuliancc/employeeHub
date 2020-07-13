@@ -1,6 +1,6 @@
 package com.threedi.hub.employeeHub.fileDomain;
 
- class Department {
+public class Department {
 
     private double DepartmentCode;
     private String DepartmentName;

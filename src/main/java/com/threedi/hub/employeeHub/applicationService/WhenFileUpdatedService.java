@@ -4,12 +4,14 @@ package com.threedi.hub.employeeHub.applicationService;
 import com.threedi.hub.employeeHub.infrastructure.AppConfigurationProperties;
 import com.threedi.hub.employeeHub.fileDomain.ExelFile;
 import com.threedi.hub.employeeHub.fileDomain.GenericFile;
+import com.threedi.hub.employeeHub.repos.ExelFileRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.PostConstruct;
 import java.io.File;
 
@@ -20,11 +22,19 @@ public class WhenFileUpdatedService {
 
     private static final Logger log = LoggerFactory.getLogger(WhenFileUpdatedService.class);
 
-    @Autowired
-    AppConfigurationProperties appConfigurationProperties;
+
+    private AppConfigurationProperties appConfigurationProperties;
+    private ExelFileRepository exelFileRepository;
+
 
     private long timedif;
     private File file;
+
+    @Autowired
+    public WhenFileUpdatedService(AppConfigurationProperties appConfigurationProperties,ExelFileRepository exelFileRepository) {
+        this.appConfigurationProperties = appConfigurationProperties;
+        this.exelFileRepository = exelFileRepository;
+    }
 
     @PostConstruct
     public void postConstruct() {
@@ -46,8 +56,9 @@ public class WhenFileUpdatedService {
 
             GenericFile fileWithValues = new ExelFile();
 
-                fileWithValues.updatefileFromFolder(file);
+            fileWithValues.updatefileFromFolder(file);
 
+            exelFileRepository.addExelFile((ExelFile) fileWithValues);
         }
 
         this.timedif = timedif;

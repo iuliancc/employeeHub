@@ -56,7 +56,7 @@ public class Employee {
         return address;
     }
 
-    public Boolean getCurrentAddress() {
+    public Boolean getIsCurrentAddress() {
         return isCurrentAddress;
     }
 

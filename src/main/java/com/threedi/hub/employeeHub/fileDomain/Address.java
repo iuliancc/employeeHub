@@ -1,7 +1,7 @@
 package com.threedi.hub.employeeHub.fileDomain;
 
 
- class Address {
+public class Address {
 
     private final String addressLine1 ;
     private final String addressLine2 ;
